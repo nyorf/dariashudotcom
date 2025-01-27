@@ -8,12 +8,12 @@ app = FastAPI()
 
 @app.get(path="/")
 async def getWallpaper():
-    return RedirectResponse(url="https://dariashu.notion.site/f5f32e2f1f494086811bf2dad750cdba", permanent=False)
+    return RedirectResponse(url="https://dariashu.notion.site/f5f32e2f1f494086811bf2dad750cdba")
 
 
 @app.route("/{full_path:path}")
 async def catch_all(full_path: str):  # catch-all route, temporary as there's no content
-    return RedirectResponse(url="https://dariashu.notion.site/f5f32e2f1f494086811bf2dad750cdba", permanent=False)
+    return RedirectResponse(url="https://dariashu.notion.site/f5f32e2f1f494086811bf2dad750cdba")
 
 
 @app.get(path="/robots.txt")
