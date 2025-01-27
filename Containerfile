@@ -1,4 +1,4 @@
-FROM python:3.13.1-slim
+FROM quay.io/fedora/python-313
 
 LABEL maintainer="me@nyorf.com"
 
