@@ -13,7 +13,7 @@ async def robots():
 
 
 @app.get(path="/")
-async def getWallpaper():
+async def main_route():
     return RedirectResponse(url="https://dariashu.notion.site/f5f32e2f1f494086811bf2dad750cdba")
 
 
