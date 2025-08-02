@@ -1,15 +1,20 @@
-FROM quay.io/fedora/python-313
+FROM python:3.13.5-bookworm
 
-LABEL maintainer="me@nyorf.com"
+WORKDIR /app
 
-COPY requirements.txt requirements.txt
+COPY requirements.txt .
 
-COPY data/robots.txt data/robots.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip3 install --upgrade pip
+# copying all code into container
+COPY . .
 
-RUN pip3 install -r requirements.txt
+# immediate stdout/stderr output + preventing .pyc file creation
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
 
-COPY main.py main.py
+# creating a non-root user to run the application
+RUN useradd --create-home --shell /bin/bash app && chown -R app:app /app
+USER app
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "14300"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
